@@ -1,6 +1,7 @@
 import gzip
 import pandas as pd
 import xml.etree.ElementTree as ET
+import sqlalchemy
 
 class Articles():
     def __init__(self, path: str):
@@ -57,6 +58,9 @@ class Articles():
                 # <el.tag></el.tag>
             elif el.tag == 'PubDate':
                 for subtag in el:
+                    year = '2000'
+                    month = '01'
+                    day = '01'
                     if subtag.tag == 'Year':
                         year = subtag.text
                     elif subtag.tag == 'Month':
@@ -90,7 +94,27 @@ class Articles():
     def get_entries(self):
         """Get parsed articles"""
         return self.article_df
+
+    def to_db(self, path: str = "data/article_grant_db.sqlite"):
+        """Send the read-in data to the database
+
+            Args:
+            path (str, optional): Location of sqlite file.
+                Defaults to 'data/article_grant_db.sqlite'.
+        """
+        # Define the connection
+        engine = sqlalchemy.create_engine("sqlite:///data/article_grant_db.sqlite")
+        connection = engine.connect()
+
+        # Always append. Deletion should be more thoughtful
+        # NEVER alter raw data.
+        # Pandas has its own index. That is different from the primary key.
+        # If you want, you can use the primary key as an index. I don't.
+        # It's complicated.
+
+        self.df[["ArticleTitle", 'PMID']].rename(columns = {'ArticleTitle' : 'title', 'PMID' : 'pmid'}).to_sql("articles", connection, if_exists = "append", index = False)
     
 
 if __name__ == '__main__':
     articles = Articles('data/pubmed25n1275.xml.gz')
+    print(articles.get_entries())
