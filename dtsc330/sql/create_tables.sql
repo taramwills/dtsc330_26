@@ -1,7 +1,18 @@
-CREATE TABLE IF NOT EXISTS grants(
+CREATE TABLE IF NOT EXISTS grants (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   application_id VARCHAR(20) NOT NULL,
   start_at DATE,
   grant_type VARCHAR(10),
   total_cost INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS articles (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  pmid VARCHAR(20) NOT NULL,
+  title VARCHAR(250) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS grants_articles (
+  grant_id INTEGER NOT NULL,
+  article_id INTEGER NOT NULL
 );
