@@ -1,7 +1,5 @@
 # dtsc330_26
 
-# dtsc330
-
 # HW 2
 
 How do you fill in the missing dates from the grants data?
@@ -58,3 +56,15 @@ Accuracy: 0.5721040189125296
 The 10s interval became slightly more accurate and the 60s interval became slightly less accurate.
 
 ![Machine learning diagram](actual-machine-learning-diagram.png)
+
+# HW 8
+
+Entity resolution is the process of linking different data sources that refer to the same person or thing. For example, John Smith is listed on one database and Jonathan Smith is listed on the other. If John and Jonathan were the same person, then entity resolution would link both records together.
+- Week 1: we talked about examples of LLMs and companies that use LLMs, such as ChatGPT and Spotify, on Spotify, there are often multiple versions of the same song (single vs. album vs. deluxe album), entity resolution would aggregate all total streams for all version to determine its position on the charts.
+- Week 2: we started looking at the article vs. grants data, entity resolution would link the article authors with grantees
+- Week 3: we read in the HAR data to look at sleep classification, we read in heartrate, motion, and labels and applied it to an ID that represents one person
+- Week 4: we looked at classifiers such as XGBoost, determine separate entities based on how they are classified
+- Week 5: we looked at fasttext, gives each word a vector (like an ID), if two words have a similar meaning, then their vectors would be linked
+- Week 6: when you create training data, you have to train on examples - J. Smith and John Smith are the same person, Jane Doe and John Smith are not
+- Week 7: used SQL, created a bridge table for HW, linked articles and grants table using primary key
+- Week 8: talked about what happens when multiple data points are linked (not just one to one), use graphs to map out data points, determine if two nodes are connected or not, a node can be connected to more than one other node
