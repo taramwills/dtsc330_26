@@ -1,66 +1,48 @@
-import fasttext
-import jarowinkler
+"""This is our resuable classifier. A classifier should be able
+to be trained, as well as to able to make predictions. These
+functions share the same data, which suggests we should use:
+"""
+
 import numpy as np
-import pandas as pd
+import sklearn
+
+# import xgboost
+
+# NOTE: We can use a custom classifier, but most classiifers are
+# implemented well.
+# Common classifiers (though not the best) are in scikit-learn
+# Some of the best ones are their own, such as xgboost
 
 
-def set_dist(x: str, y: str) -> float:
-    """Return the fraction of words that overlap relative to the shorter
-    string.
+class EntityResolutionClassifier:
+    def __init__(self, model_type: str = "logistic_regression"):
+        # self has to be passed within classes, it gives us access to shared variables
+        # model_type is the argument
+        # : str is type hinting, which shows that the input MUST be a string
+        # = 'logistic_regression' is the default argument
+        # ALL shared variables must be defined init
+        """Create a reusable classifier
 
-    Args:
-        x (str): string 1
-        y (str): string 2
+        Args:
+            model_type (str, optional): model type can be either
+                logistic_regression or random_forest. Defaults to
+                'logistic_regression'.
+        """
+        self.model = None
 
-    Returns:
-        float: fraction of overlap
-    """
-    words1 = x.replace(" ", ",").split(",")
-    words2 = y.replace(" ", ",").split(",")
-    words1 = set([word for word in words1 if len(word) > 0])
-    words2 = set([word for word in words2 if len(word) > 0])
+    def train(self, features, labels):
+        """Train a model. In this case, scaling is not necessary"""
+        self.model = sklearn.ensemble.RandomForestClassifier()
+        self.model.fit(features, labels.astype(int))
 
-    denom = min(len(words1), len(words2))
-    numer = len(words1.intersection(words2))
-    return numer / denom
+    def predict(self, features):
+        """Predict labels using model_type from features
 
-
-class EntityResolutionFeatures:
-    def features(self, comb_df: pd.DataFrame) -> pd.DataFrame:
-        # For each character slot, is it the same character?
-        # Fails for deletions and insertions
-        comb_df["jw_fn_dist"] = comb_df.apply(
-            lambda row: jarowinkler.jaro_similarity(row["forename_x"], row["forename_y"]),
-            axis = 1,
-        )
-        comb_df["jw_sn_dist"] = comb_df.apply(
-            lambda row: jarowinkler.jaro_similarity(row["surname_x"], row["surname_y"]),
-            axis = 1,
-        )
-
-        comb_df["set_aff_dist"] = comb_df.apply(
-            lambda row: set_dist(row["affiliation_x"], row["affiliation_y"]), axis = 1
-        )
-
-        comb_df["ft_fn_dist"] = comb_df.apply(
-            lambda row: np.linalg.norm(
-                row["ft_forename_vec_x"] - row["ft_forename_vec_y"]
-            ),
-            axis = 1,
-        )
-        comb_df["ft_sn_dist"] = comb_df.apply(
-            lambda row: np.linalg.norm(
-                row["ft_surname_vec_x"] - row["ft_surname_vec_y"]
-            ),
-            axis = 1,
-        )
-
-        return comb_df[
-            [
-                "jw_fn_dist",
-                "jw_sn_dist",
-                "set_aff_dist",
-                "ft_fn_dist",
-                "ft_surname_dist",
-            ]
-        ]
+        Args:
+            features (_type_): Features MUST be the same types as in
+                the training data, and in the same order
+        """
+        features = self.scaler.transform(features)
+        return self.model.predict_proba(features)[:, 1]  # we can use predict_proba
+        # which returns the probability rather than true/false
+        # which returns the probability rather than true/false

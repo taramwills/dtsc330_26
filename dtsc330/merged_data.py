@@ -3,7 +3,7 @@ from typing import Generator
 import fasttext
 import pandas as pd
 
-from dtsc330_26.readers import articles, grants
+from dtsc330.readers import articles, grants
 
 
 class MergedData:
