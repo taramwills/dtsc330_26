@@ -68,3 +68,8 @@ Entity resolution is the process of linking different data sources that refer to
 - Week 6: when you create training data, you have to train on examples - J. Smith and John Smith are the same person, Jane Doe and John Smith are not
 - Week 7: used SQL, created a bridge table for HW, linked articles and grants table using primary key
 - Week 8: talked about what happens when multiple data points are linked (not just one to one), use graphs to map out data points, determine if two nodes are connected or not, a node can be connected to more than one other node
+
+# HW 9
+https://teachablemachine.withgoogle.com/models/QDxN2a7Kc/
+
+For my neural network, I uploaded various pictures of cats and humans. I only uploaded about 4 photos for each and it was able to recognize either almost 100% accurately. I also then showed it photos of a human holding a cat, which it was also able to detect both in one photo. I think this classifier works so well with few training images because it has already been trained to recognize specific shapes, I only conducted the final rule of what to exactly look for.
