@@ -73,3 +73,6 @@ Entity resolution is the process of linking different data sources that refer to
 https://teachablemachine.withgoogle.com/models/QDxN2a7Kc/
 
 For my neural network, I uploaded various pictures of cats and humans. I only uploaded about 4 photos for each and it was able to recognize either almost 100% accurately. I also then showed it photos of a human holding a cat, which it was also able to detect both in one photo. However, if there was neither in the camera, it wouldn't understand and think both might be there. I think this classifier works so well with few training images because it has already been trained to recognize specific shapes, I only conducted the final rule of what to exactly look for.
+
+# HW 12
+This week, we used an email dataset and I created a classifier that would determine if an email was spam. First, I tried comparing has_suspicious_link column with the labels column and didn't find any correlation. Next, I looked at the unique values in the subject column and recorded words that seemed to be spam. I did the same process with the email_text column and gathered a few more key words. I looped through the dataset to note the columns that had these key words in either their subject or body. I used the reusable_classifier from earlier this semester to run an XGBoost test. My classifier has an accuracy of 0.9985.
