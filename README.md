@@ -76,3 +76,6 @@ For my neural network, I uploaded various pictures of cats and humans. I only up
 
 # HW 12
 This week, we used an email dataset and I created a classifier that would determine if an email was spam. First, I tried comparing has_suspicious_link column with the labels column and didn't find any correlation. Next, I looked at the unique values in the subject column and recorded words that seemed to be spam. I did the same process with the email_text column and gathered a few more key words. I looped through the dataset to note the columns that had these key words in either their subject or body. I used the reusable_classifier from earlier this semester to run an XGBoost test. My classifier has an accuracy of 0.9985.
+
+# HW 13
+This week we used tensorflow to create a neural network to fix spelling mistakes. I used the example code on Github as a starting point. For my examples, I wanted to create a bunch of ways a word could be misspelled. I used AI to help generate some functions that would swap letters around. I also used it to generate a bunch of misspelling of words.
