@@ -1,6 +1,6 @@
 # dtsc330_26
 
-# HW 2
+# Week 2
 
 How do you fill in the missing dates from the grants data?
     - Made loop to look at range of missing dates
@@ -29,7 +29,7 @@ The dates for Articles are problematic. Can you fix them?
         ○ If tags are month, day, year: save into variable
 Format into year-month-day
 
-# HW 3
+# Week 3
 - Read in har (first 10 participants) and reusable classifier files
 - Converted the timestamp data into a timeseries so that I could resample the data
 - Determined unique participants
@@ -44,7 +44,7 @@ Format into year-month-day
 - 60s: 0.5862884160756501
 - 10s: 0.6007462686567164
 
-# HW 4
+# Week 4
 After implementing XGBoost to my reusable classifier, these are the new accuracies:
 10s: 
 Correct: 1484 / 2412
@@ -57,7 +57,7 @@ The 10s interval became slightly more accurate and the 60s interval became sligh
 
 ![Machine learning diagram](actual-machine-learning-diagram.png)
 
-# HW 8
+# Week 8
 
 Entity resolution is the process of linking different data sources that refer to the same person or thing. For example, John Smith is listed on one database and Jonathan Smith is listed on the other. If John and Jonathan were the same person, then entity resolution would link both records together.
 - Week 1: we talked about examples of LLMs and companies that use LLMs, such as ChatGPT and Spotify, on Spotify, there are often multiple versions of the same song (single vs. album vs. deluxe album), entity resolution would aggregate all total streams for all version to determine its position on the charts.
@@ -69,13 +69,13 @@ Entity resolution is the process of linking different data sources that refer to
 - Week 7: used SQL, created a bridge table for HW, linked articles and grants table using primary key
 - Week 8: talked about what happens when multiple data points are linked (not just one to one), use graphs to map out data points, determine if two nodes are connected or not, a node can be connected to more than one other node
 
-# HW 9
+# Week 9
 https://teachablemachine.withgoogle.com/models/QDxN2a7Kc/
 
 For my neural network, I uploaded various pictures of cats and humans. I only uploaded about 4 photos for each and it was able to recognize either almost 100% accurately. I also then showed it photos of a human holding a cat, which it was also able to detect both in one photo. However, if there was neither in the camera, it wouldn't understand and think both might be there. I think this classifier works so well with few training images because it has already been trained to recognize specific shapes, I only conducted the final rule of what to exactly look for.
 
-# HW 12
+# Week 12
 This week, we used an email dataset and I created a classifier that would determine if an email was spam. First, I tried comparing has_suspicious_link column with the labels column and didn't find any correlation. Next, I looked at the unique values in the subject column and recorded words that seemed to be spam. I did the same process with the email_text column and gathered a few more key words. I looped through the dataset to note the columns that had these key words in either their subject or body. I used the reusable_classifier from earlier this semester to run an XGBoost test. My classifier has an accuracy of 0.9985.
 
-# HW 13
+# Week 13
 This week we used tensorflow to create a neural network to fix spelling mistakes. I used the example code on Github as a starting point. For my examples, I wanted to create a bunch of ways a word could be misspelled. I used AI to help generate some functions that would swap letters around. I also used it to generate a bunch of misspelling of words.
