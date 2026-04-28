@@ -22,7 +22,7 @@ class TransformerEncoderBlock(keras.layers.Layer):
         # MultiHeadAttention is the attention matrix of the transformer
         # block
         self.attn = keras.layers.MultiHeadAttention(
-            num_heads=num_heads, key_dim=embed_dim
+            num_heads = num_heads, key_dim = embed_dim
         )
 
         # This sequential is the following "multilayer perceptron" or
@@ -31,7 +31,7 @@ class TransformerEncoderBlock(keras.layers.Layer):
         # embeddings.
         self.ffn = keras.Sequential(
             [
-                keras.layers.Dense(ff_dim, activation="relu"),
+                keras.layers.Dense(ff_dim, activation = "relu"),
                 keras.layers.Dense(embed_dim),
             ]
         )

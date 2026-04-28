@@ -38,9 +38,9 @@ class Seq2SeqTransformer:
             vocab_size, max_len, embed_dim, num_heads, ff_dim
         )
         self.model.compile(
-            optimizer="adam",
-            loss=keras.losses.SparseCategoricalCrossentropy(),
-            metrics=["accuracy"],
+            optimizer = "adam",
+            loss = keras.losses.SparseCategoricalCrossentropy(),
+            metrics = ["accuracy"],
         )
 
     def fit(
@@ -60,11 +60,11 @@ class Seq2SeqTransformer:
         pad_mask = (corrected_label_data != pad_id).astype(np.float32)
 
         self.model.fit(
-            x=(wrong_data, corrected_comparison_data),
-            y=corrected_label_data,
-            sample_weight=pad_mask,
-            epochs=training_epochs,
-            verbose=1,
+            x = (wrong_data, corrected_comparison_data),
+            y = corrected_label_data,
+            sample_weight = pad_mask,
+            epochs = training_epochs,
+            verbose = 1,
         )
 
     def correct(self, txt: str) -> str:
@@ -112,7 +112,7 @@ class Seq2SeqTransformer:
             corrected_comparison_data.append(di)
             corrected_label_data.append(do)
 
-        wrong_data = np.array(wrong_data, dtype=np.int32)
+        wrong_data = np.array(wrong_data, dtype = np.int32)
         corrected_comparison_data = np.array(corrected_comparison_data, dtype=np.int32)
         corrected_label_data = np.array(corrected_label_data, dtype=np.int32)
 
@@ -127,8 +127,8 @@ class Seq2SeqTransformer:
         ff_dim: int = 128,
     ):
         """Create the model itself."""
-        enc_inputs = keras.Input(shape=(None,), dtype="int32", name="encoder_input")
-        dec_inputs = keras.Input(shape=(None,), dtype="int32", name="decoder_input")
+        enc_inputs = keras.Input(shape = (None,), dtype = "int32", name = "encoder_input")
+        dec_inputs = keras.Input(shape = (None,), dtype = "int32", name = "decoder_input")
 
         enc_x = token_position_embedding.TokenAndPositionEmbedding(
             vocab_size, max_len + 1, embed_dim
@@ -144,6 +144,6 @@ class Seq2SeqTransformer:
             embed_dim, num_heads, ff_dim
         )(dec_x, enc_x)
 
-        outputs = keras.layers.Dense(vocab_size, activation="softmax")(dec_x)
+        outputs = keras.layers.Dense(vocab_size, activation = "softmax")(dec_x)
 
         return keras.Model([enc_inputs, dec_inputs], outputs)

@@ -101,7 +101,7 @@ if __name__ == "__main__":
 
     model = seq2seq_transformer.Seq2SeqTransformer(max_len = 32)
 
-    model.fit(training_pairs, training_epochs=300)
+    model.fit(training_pairs, training_epochs = 300)
 
     test_words = [
         "recieve",

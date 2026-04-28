@@ -34,7 +34,7 @@ class TokenAndPositionEmbedding(keras.layers.Layer):
             Any: the next layer
         """
         length = tf.shape(x)[1]
-        positions = tf.range(start=0, limit=length, delta=1)
+        positions = tf.range(start = 0, limit = length, delta = 1)
         positions = self.pos_emb(positions)
         x = self.token_emb(x)
         return x + positions
